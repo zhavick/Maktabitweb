@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter', sans-serif;
+  --font-display: var(--font-plus-jakarta), 'Plus Jakarta Sans', sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animasi Logo SVG pada Splash Screen */
+.logo-stroke {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: drawStroke 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Efek Kilau pada Progress Bar */
+.progress-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Transisi Splash Screen */
+#splash-screen {
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.8s;
+}
+
+.splash-hidden {
+  opacity: 0 !important;
+  transform: scale(1.04) !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Transisi Masuk Halaman Utama */
+#main-wrapper {
+  transition: opacity 0.85s ease-out;
+}
+
+.page-visible {
+  opacity: 1 !important;
+}
+
+/* Pola Grid Teknis Halus */
+.tech-grid-bg {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
