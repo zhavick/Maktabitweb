@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Local media uploads
+maktabit-web/media/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.log

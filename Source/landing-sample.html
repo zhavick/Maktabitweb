@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaktabIT Technology — Solusi Rekayasa Perangkat Lunak & Inovasi Digital</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animasi Logo SVG pada Splash Screen */
+        .logo-stroke {
+            stroke-dasharray: 260;
+            stroke-dashoffset: 260;
+            animation: drawStroke 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes drawStroke {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Efek Kilau pada Progress Bar */
+        .progress-shimmer {
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.35) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Transisi Splash Screen */
+        #splash-screen {
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        visibility 0.8s;
+        }
+
+        .splash-hidden {
+            opacity: 0 !important;
+            transform: scale(1.04) !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Transisi Masuk Halaman Utama */
+        #main-wrapper {
+            transition: opacity 0.85s ease-out;
+        }
+
+        .page-visible {
+            opacity: 1 !important;
+        }
+
+        /* Pola Grid Teknis Halus */
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-800 antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- =====================================================================
+         1. SPLASH SCREEN (PRELOADER INTERAKTIF)
+         ===================================================================== -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-between bg-slate-950 text-white px-6 py-8 sm:py-10 overflow-hidden tech-grid-bg">
+        
+        <!-- Ambient Glow Latar Belakang -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[560px] sm:h-[560px] bg-sky-600/15 rounded-full blur-[110px] pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] bg-emerald-500/10 rounded-full blur-[95px] pointer-events-none"></div>
+
+        <!-- Header Splash: Indikator Sistem -->
+        <div class="relative z-10 flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>MAKTABIT ENGINE // INITIALIZING</span>
+        </div>
+
+        <!-- Konten Tengah Splash: Logo Kustom, Prakata Singkat & Progress Bar -->
+        <div class="relative z-10 flex flex-col items-center text-center max-w-lg w-full my-auto">
+            
+            <!-- Wadah Logo Brand MaktabIT Technology -->
+            <div class="relative mb-7 animate-float">
+                <div class="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-sky-500 via-cyan-400 to-emerald-400 opacity-25 blur-xl"></div>
+                <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-slate-900 border border-slate-700/80 shadow-2xl flex items-center justify-center backdrop-blur-xl">
+                    <!-- Custom Geometric SVG Logo: Maktab (Buku/Meja Karya) + M + Digital Nodes -->
+                    <svg class="w-16 h-16 sm:w-18 sm:h-18" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="maktabSplashGrad" x1="10" y1="10" x2="62" y2="62" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#38BDF8"/>
+                                <stop offset="55%" stop-color="#0EA5E9"/>
+                                <stop offset="100%" stop-color="#10B981"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Bingkai Segi Delapan Modern -->
+                        <path class="logo-stroke" d="M24 8H48L64 24V48L48 64H24L8 48V24L24 8Z" stroke="url(#maktabSplashGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Monogram M & Bentuk Buku Terbuka (Maktab) -->
+                        <path class="logo-stroke" d="M20 46V26L36 37L52 26V46" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Titik Simpul Digital -->
+                        <circle cx="36" cy="21" r="3" fill="#10B981"/>
+                        <path class="logo-stroke" d="M26 51H46" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Identitas Brand -->
+            <div class="space-y-2 mb-8">
+                <h1 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    Maktab<span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">IT</span> Technology
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+                    Merancang fondasi perangkat lunak yang presisi, skalabel, dan berdampak nyata bagi transformasi digital masa depan.
+                </p>
+            </div>
+
+            <!-- Bilah Progres (0 - 100%) -->
+            <div class="w-full max-w-xs sm:max-w-sm space-y-2.5">
+                <div class="flex justify-between items-center text-xs font-medium">
+                    <span id="splash-status" class="text-slate-400">Menyiapkan lingkungan kerja...</span>
+                    <span id="splash-percent" class="font-mono text-sky-400 font-semibold tabular-nums">0%</span>
+                </div>
+                <div class="w-full h-2 bg-slate-800/90 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                    <div id="splash-progress" class="h-full w-0 rounded-full bg-gradient-to-r from-sky-500 via-cyan-400 to-emerald-400 transition-all duration-200 ease-out relative overflow-hidden">
+                        <div class="absolute inset-0 progress-shimmer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Lewati / Masuk Langsung -->
+            <div class="mt-8">
+                <button id="skip-splash-btn" onclick="enterMainSite()" class="group inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-slate-900 hover:bg-sky-600 border border-slate-700 hover:border-sky-500 rounded-xl shadow-lg transition-all duration-300 active:scale-95">
+                    <span id="skip-btn-label">Lewati Intro</span>
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer Splash -->
+        <div class="relative z-10 text-xs text-slate-500 font-mono">
+            &copy; 2026 MaktabIT Technology • Software Engineering Studio
+        </div>
+    </div>
+
+
+    <!-- =====================================================================
+         2. HALAMAN UTAMA PERUSAHAAN (MAKTABIT TECHNOLOGY)
+         ===================================================================== -->
+    <div id="main-wrapper" class="opacity-0 bg-slate-50 min-h-screen flex flex-col">
+
+        <!-- NAVBAR RESPONSIF -->
+        <header class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800/80 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex items-center justify-between">
+                
+                <!-- Brand Logo Header -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 group-hover:border-sky-500/70 flex items-center justify-center transition-colors shadow-sm">
+                        <svg class="w-6 h-6" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 8H48L64 24V48L48 64H24L8 48V24L24 8Z" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 46V26L36 37L52 26V46" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="36" cy="20" r="3.5" fill="#10B981"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-lg tracking-tight leading-none text-white">
+                            Maktab<span class="text-sky-400">IT</span>
+                        </span>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-0.5">Technology</span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Desktop -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
+                    <a href="#tentang" class="hover:text-white transition-colors">Prakata & Profil</a>
+                    <a href="#layanan" class="hover:text-white transition-colors">Layanan</a>
+                    <a href="#proyek" class="hover:text-white transition-colors">Proyek Awal</a>
+                    <a href="#teknologi" class="hover:text-white transition-colors">Teknologi</a>
+                    <a href="#kontak" class="hover:text-white transition-colors">Kontak</a>
+                </nav>
+
+                <!-- Aksi Kanan Navbar -->
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <!-- Tombol Putar Ulang Splash -->
+                    <button onclick="replaySplash()" title="Putar Ulang Animasi Splash Screen" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-xl transition-all">
+                        <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        <span class="hidden sm:inline">Splash</span>
+                    </button>
+
+                    <!-- Tombol CTA Konsultasi -->
+                    <a href="#kontak" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-950 bg-gradient-to-r from-sky-400 to-emerald-400 hover:from-sky-300 hover:to-emerald-300 rounded-xl shadow-md transition-all">
+                        <span>Mulai Kolaborasi</span>
+                    </a>
+
+                    <!-- Tombol Menu Mobile -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800" aria-label="Buka Menu">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dropdown Menu Mobile -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-5 space-y-2">
+                <a href="#tentang" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Prakata & Profil</a>
+                <a href="#layanan" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Layanan Kami</a>
+                <a href="#proyek" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Proyek Pengembangan Awal</a>
+                <a href="#teknologi" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Ekosistem Teknologi</a>
+                <a href="#kontak" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-xl text-sm font-semibold text-sky-400 hover:bg-slate-800">Hubungi & Kolaborasi</a>
+            </div>
+        </header>
+
+        <!-- =================================================================
+             HERO SECTION & PRAKATA PERUSAHAAN
+             ================================================================= -->
+        <section class="relative bg-slate-950 text-white pt-14 pb-20 sm:pt-20 sm:pb-28 overflow-hidden tech-grid-bg">
+            <!-- Dekorasi Cahaya -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                    
+                    <!-- Kolom Kiri: Copywriting & Prakata -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-sky-400">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span>Software Engineering & Digital Product Studio</span>
+                        </div>
+
+                        <h1 class="font-display text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.15]">
+                            Membangun Perangkat Lunak Cerdas untuk <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-400">Efisiensi & Kebermanfaatan</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                            Selamat datang di <strong class="text-white">MaktabIT Technology</strong>. Terinspirasi dari filosofi <em>"Maktab"</em> sebagai pusat literasi, karya, dan produktivitas, kami hadir sebagai mitra pengembangan perangkat lunak yang menggabungkan ketajaman arsitektur kode dengan desain antarmuka yang humanis.
+                        </p>
+
+                        <!-- Tombol Aksi Utama -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+                            <a href="#proyek" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/25 transition-all">
+                                <span>Eksplorasi Proyek Awal</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </a>
+                            <a href="#tentang" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm border border-slate-700 transition-all">
+                                <span>Baca Prakata Perusahaan</span>
+                            </a>
+                        </div>
+
+                        <!-- Sorotan Nilai Inti -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
+                            <div>
+                                <div class="font-display font-bold text-xl text-white">Clean Code</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Arsitektur Terstruktur</div>
+                            </div>
+                            <div>
+                                <div class="font-display font-bold text-xl text-sky-400">Agile Dev</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Iterasi Cepat & Tepat</div>
+                            </div>
+                            <div>
+                                <div class="font-display font-bold text-xl text-emerald-400">Open Tech</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Inovasi Terbuka</div>
+                            </div>
+                            <div>
+                                <div class="font-display font-bold text-xl text-white">Scalable</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Siap Berkembang</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Visual Workspace & Terminal Card -->
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl bg-slate-900 border border-slate-800 p-3 shadow-2xl">
+                            <!-- Gambar Bebas Lisensi dari Unsplash -->
+                            <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-800">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" 
+                                    alt="Lingkungan Pengembangan Perangkat Lunak MaktabIT Technology" 
+                                    class="w-full h-full object-cover object-center opacity-90 hover:scale-105 transition-transform duration-700"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x600/0f172a/38bdf8?text=MaktabIT+Software+Studio';"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                                
+                                <!-- Overlay Kartu Kode Mengambang -->
+                                <div class="absolute bottom-3 left-3 right-3 bg-slate-950/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-3.5 font-mono text-xs">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                                        </div>
+                                        <span class="text-[10px] text-slate-400">maktabit.config.ts</span>
+                                    </div>
+                                    <div class="text-slate-300 space-y-0.5">
+                                        <div><span class="text-sky-400">const</span> company = <span class="text-emerald-400">"MaktabIT Technology"</span>;</div>
+                                        <div><span class="text-sky-400">const</span> focus = [<span class="text-amber-300">"TaskWorkerPro"</span>, <span class="text-amber-300">"QuranWeb"</span>];</div>
+                                        <div class="text-slate-400">// Membangun solusi digital berdampak</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             BAGIAN 2: PRAKATA & IDENTITAS PERUSAHAAN (TENTANG KAMI)
+             ================================================================= -->
+        <section id="tentang" class="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Visual & Kartu Filosofi Logo -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100 aspect-[16/11] relative">
+                            <img 
+                                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" 
+                                alt="Kolaborasi Tim MaktabIT Technology" 
+                                class="w-full h-full object-cover"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x550/e2e8f0/0f172a?text=Tim+Engineering+MaktabIT';"
+                            >
+                        </div>
+
+                        <!-- Kartu Filosofi Identitas Logo -->
+                        <div class="bg-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-lg">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 shrink-0 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">
+                                    <svg class="w-7 h-7" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24 8H48L64 24V48L48 64H24L8 48V24L24 8Z" stroke="#38BDF8" stroke-width="4"/>
+                                        <path d="M20 46V26L36 37L52 26V46" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="36" cy="20" r="3.5" fill="#10B981"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-base text-white">Filosofi Identitas MaktabIT</h4>
+                                    <p class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+                                        Monogram <strong>"M"</strong> menyerupai lembar buku terbuka di dalam bingkai segi delapan presisi, melambangkan perpaduan antara <strong>ilmu pengetahuan (Maktab)</strong> dan <strong>rekayasa teknologi modern (IT)</strong>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prakata Eksekutif & Visi Misi -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200/70 text-sky-700 text-xs font-semibold">
+                            Prakata & Perkenalan Perusahaan
+                        </div>
+
+                        <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Menjembatani Ide Kompleks Menjadi Produk Digital yang Andal
+                        </h2>
+
+                        <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                            <p>
+                                <strong>Assalamu’alaikum Warahmatullahi Wabarakatuh & Salam Inovasi,</strong>
+                            </p>
+                            <p>
+                                <strong>MaktabIT Technology</strong> didirikan atas keyakinan bahwa perangkat lunak yang hebat bukan hanya tentang baris kode yang rumit, melainkan tentang seberapa besar solusi tersebut mempermudah pekerjaan manusia, mempercepat produktivitas, dan memberikan nilai manfaat yang berkelanjutan.
+                            </p>
+                            <p>
+                                Sebagai perusahaan yang berfokus pada pengembangan perangkat lunak (<em>Software Development</em>), kami mengawali langkah melalui riset dan pembuatan produk nyata—mulai dari otomasi manajemen tugas berskala tinggi hingga platform literasi digital yang ringan dan mudah diakses oleh masyarakat luas.
+                            </p>
+                        </div>
+
+                        <!-- Visi & Misi Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                                <div class="flex items-center gap-2.5 mb-2">
+                                    <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-sm">01</span>
+                                    <h3 class="font-display font-bold text-slate-900">Visi Kami</h3>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                    Menjadi studio rekayasa perangkat lunak terpercaya yang melahirkan inovasi teknologi berstandar global, efisien, dan bernilai guna tinggi.
+                                </p>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                                <div class="flex items-center gap-2.5 mb-2">
+                                    <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">02</span>
+                                    <h3 class="font-display font-bold text-slate-900">Misi Kami</h3>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                    Mengembangkan sistem otomasi bisnis, aplikasi web modern, serta platform digital berbasis <em>clean architecture</em> dengan pengalaman pengguna terbaik.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             BAGIAN 3: LAYANAN & KAPABILITAS PENGEMBANGAN
+             ================================================================= -->
+        <section id="layanan" class="py-16 sm:py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <span class="text-xs font-mono font-semibold uppercase tracking-widest text-sky-600">Fokus Keahlian</span>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+                        Layanan Pengembangan Software
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-3">
+                        Kami merancang dan membangun solusi digital dari tahap konsep, arsitektur sistem, hingga implementasi siap produksi.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Layanan 1 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Custom Web Application</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Pengembangan aplikasi berbasis web modern yang responsif, cepat, dan aman sesuai kebutuhan operasional bisnis maupun institusi.
+                        </p>
+                    </div>
+
+                    <!-- Layanan 2 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Otomasi & Task Worker</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Perancangan sistem penjadwalan tugas otomatis (<em>background worker</em>), antrean proses, dan manajemen alur kerja terdistribusi.
+                        </p>
+                    </div>
+
+                    <!-- Layanan 3 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Platform Literasi & Edukasi</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Pembangunan portal konten digital, aplikasi Al-Qur'an web, dan sistem pembelajaran interaktif dengan tipografi nyaman dibaca.
+                        </p>
+                    </div>
+
+                    <!-- Layanan 4 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-slate-900 mb-2">API & Arsitektur Sistem</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Integrasi REST/GraphQL API, optimasi basis data, serta konsultasi arsitektur <em>cloud-ready</em> yang mudah dipelihara.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             BAGIAN 4: ETALASE PROYEK PENGEMBANGAN AWAL (FEATURED PROJECTS)
+             ================================================================= -->
+        <section id="proyek" class="py-16 sm:py-24 bg-white border-t border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Header Bagian Proyek -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold mb-3">
+                            Inisiatif & Portofolio Awal
+                        </div>
+                        <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Proyek Pengembangan Awal Kami
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl">
+                            Dua fondasi proyek perdana yang dikembangkan oleh tim MaktabIT Technology, mencerminkan fokus kami pada produktivitas sistem dan kebermanfaatan publik.
+                        </p>
+                    </div>
+
+                    <a href="https://github.com/zhavick" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold transition-colors self-start md:self-auto">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                        </svg>
+                        <span>Profil GitHub Resmi</span>
+                    </a>
+                </div>
+
+                <!-- Grid 2 Kartu Proyek Utama -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+
+                    <!-- =====================================================
+                         PROYEK 1: TaskWorkerPro
+                         ===================================================== -->
+                    <article class="group flex flex-col bg-slate-50 rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                        <!-- Gambar Preview Unsplash + Badge -->
+                        <div class="relative aspect-[16/9] bg-slate-900 overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" 
+                                alt="TaskWorkerPro — Sistem Manajemen Tugas & Otomasi Worker" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x450/0f172a/38bdf8?text=TaskWorkerPro+Dashboard';"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+                            
+                            <!-- Label Kategori -->
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-sky-500/90 backdrop-blur-md text-slate-950 font-mono text-xs font-bold">
+                                    PROJECT #01
+                                </span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-900/85 backdrop-blur-md text-slate-200 border border-slate-700 text-xs font-medium">
+                                    Workflow & Automation
+                                </span>
+                            </div>
+
+                            <!-- Judul di Atas Gambar -->
+                            <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-display text-2xl font-extrabold text-white">TaskWorkerPro</h3>
+                                    <p class="text-xs font-mono text-sky-300">github.com/zhavick/TaskWorkerPro</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Konten Detail Proyek 1 -->
+                        <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                    <strong>TaskWorkerPro</strong> adalah sistem manajemen tugas, penjadwalan proses latar belakang (<em>background worker</em>), dan pemantauan alur kerja operasional yang dirancang untuk meningkatkan keandalan eksekusi tugas dan efisiensi produktivitas tim.
+                                </p>
+
+                                <!-- Daftar Fitur Utama -->
+                                <div class="space-y-2 pt-1">
+                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kapabilitas Utama:</div>
+                                    <ul class="space-y-2 text-sm text-slate-700">
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-sky-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Manajemen antrean tugas (<em>task queue</em>) & eksekusi pekerja terstruktur.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-sky-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Pemantauan status progres secara <em>real-time</em> dan pencatatan log aktivitas.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-sky-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Arsitektur modular yang mudah diintegrasikan ke berbagai layanan.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tag Teknologi -->
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Task Scheduling</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Worker Engine</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">REST API</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Dashboard UI</span>
+                                </div>
+                            </div>
+
+                            <!-- Tombol Aksi Repositori & Detail -->
+                            <div class="pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row gap-3">
+                                <a href="https://github.com/zhavick/TaskWorkerPro" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-semibold text-sm transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                                    <span>Buka Repositori GitHub</span>
+                                </a>
+                                <button onclick="openProjectModal('taskworker')" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm border border-slate-200 transition-colors">
+                                    Ringkasan Teknis
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- =====================================================
+                         PROYEK 2: QuranWeb
+                         ===================================================== -->
+                    <article class="group flex flex-col bg-slate-50 rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                        <!-- Gambar Preview Unsplash + Badge -->
+                        <div class="relative aspect-[16/9] bg-slate-900 overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1000&q=80" 
+                                alt="QuranWeb — Platform Al-Qur'an Digital Berbasis Web" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x450/064e3b/34d399?text=QuranWeb+Platform';"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
+                            
+                            <!-- Label Kategori -->
+                            <div class="absolute top-4 left-4 flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-emerald-400/95 backdrop-blur-md text-slate-950 font-mono text-xs font-bold">
+                                    PROJECT #02
+                                </span>
+                                <span class="px-3 py-1 rounded-lg bg-slate-900/85 backdrop-blur-md text-slate-200 border border-slate-700 text-xs font-medium">
+                                    Digital Islamic & Literacy
+                                </span>
+                            </div>
+
+                            <!-- Judul di Atas Gambar -->
+                            <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between">
+                                <div>
+                                    <h3 class="font-display text-2xl font-extrabold text-white">QuranWeb</h3>
+                                    <p class="text-xs font-mono text-emerald-300">github.com/zhavick/QuranWeb</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Konten Detail Proyek 2 -->
+                        <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                    <strong>QuranWeb</strong> adalah platform Al-Qur'an digital berbasis web modern yang menghadirkan antarmuka bersih, bebas gangguan, serta navigasi surah dan ayat yang cepat untuk kenyamanan tilawah dan tadabbur di berbagai perangkat.
+                                </p>
+
+                                <!-- Daftar Fitur Utama -->
+                                <div class="space-y-2 pt-1">
+                                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kapabilitas Utama:</div>
+                                    <ul class="space-y-2 text-sm text-slate-700">
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Indeks 114 surah lengkap dengan pencarian instan & navigasi ayat cepat.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Tipografi teks Arab yang jernih dilengkapi terjemahan yang mudah dipahami.</span>
+                                        </li>
+                                        <li class="flex items-start gap-2.5">
+                                            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            <span>Performa ringan & desain responsif optimal untuk ponsel maupun desktop.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tag Teknologi -->
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Modern Web UI</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Arabic Typography</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Quran API</span>
+                                    <span class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600">Responsive</span>
+                                </div>
+                            </div>
+
+                            <!-- Tombol Aksi Repositori & Detail -->
+                            <div class="pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row gap-3">
+                                <a href="https://github.com/zhavick/QuranWeb" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-semibold text-sm transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                                    <span>Buka Repositori GitHub</span>
+                                </a>
+                                <button onclick="openProjectModal('quranweb')" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm border border-slate-200 transition-colors">
+                                    Ringkasan Teknis
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             BAGIAN 5: EKOSISTEM TEKNOLOGI & STANDAR ENGINEERING
+             ================================================================= -->
+        <section id="teknologi" class="py-16 sm:py-20 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-mono font-semibold uppercase tracking-widest text-sky-400">Standar Rekayasa</span>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold mt-2">
+                        Ekosistem Teknologi Modern
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2">
+                        Kami memilih tumpukan teknologi (<em>tech stack</em>) yang teruji untuk menjamin kecepatan pengembangan, keamanan data, dan kemudahan skalabilitas.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-sky-500/50 transition-colors">
+                        <div class="text-sky-400 font-mono text-xs mb-1">01 // FRONTEND</div>
+                        <div class="font-display font-bold text-base text-white mb-1">Antarmuka Reaktif</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">HTML5, Tailwind CSS, JavaScript / TypeScript, React & Next.js untuk pengalaman UI yang mulus.</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-emerald-500/50 transition-colors">
+                        <div class="text-emerald-400 font-mono text-xs mb-1">02 // BACKEND</div>
+                        <div class="font-display font-bold text-base text-white mb-1">Arsitektur Layanan</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Node.js, Go, Python, serta sistem antrean <em>worker</em> asinkron yang tangguh.</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-indigo-500/50 transition-colors">
+                        <div class="text-indigo-400 font-mono text-xs mb-1">03 // DATA & API</div>
+                        <div class="font-display font-bold text-base text-white mb-1">Manajemen Data</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">PostgreSQL, MySQL, Redis Caching, dan desain RESTful API yang terdokumentasi rapi.</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-amber-500/50 transition-colors">
+                        <div class="text-amber-400 font-mono text-xs mb-1">04 // DEVOPS</div>
+                        <div class="font-display font-bold text-base text-white mb-1">Deployment & CI/CD</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">Kontainerisasi Docker, Git workflow, serta otomasi pengujian dan rilis berkelanjutan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             BAGIAN 6: KONTAK & KOLABORASI PROYEK
+             ================================================================= -->
+        <section id="kontak" class="py-16 sm:py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                    
+                    <!-- Informasi Kontak Perusahaan -->
+                    <div class="lg:col-span-5 bg-slate-950 text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <div class="relative z-10 space-y-5">
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-sky-400">
+                                HUBUNGI KAMI
+                            </span>
+                            <h2 class="font-display text-2xl sm:text-3xl font-extrabold leading-tight">
+                                Mari Diskusikan Proyek Digital Anda Bersama MaktabIT
+                            </h2>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Tertarik berkolaborasi pada pengembangan <strong>TaskWorkerPro</strong>, <strong>QuranWeb</strong>, atau membutuhkan tim rekayasa perangkat lunak untuk sistem baru Anda? Kirimkan pesan kepada kami.
+                            </p>
+
+                            <div class="space-y-4 pt-4 text-sm">
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-sky-400 shrink-0">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <span>hello@maktabit.tech</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 shrink-0">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    </div>
+                                    <span>Jakarta, Indonesia</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-sky-400 shrink-0">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                                    </div>
+                                    <a href="https://github.com/zhavick" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400 underline underline-offset-4">github.com/zhavick</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 pt-8 mt-8 border-t border-slate-800 text-xs text-slate-400">
+                            Respons cepat dalam 1x24 jam hari kerja.
+                        </div>
+                    </div>
+
+                    <!-- Formulir Konsultasi -->
+                    <div class="lg:col-span-7 p-8 sm:p-10">
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="sender-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Nama Lengkap</label>
+                                    <input type="text" id="sender-name" required placeholder="Contoh: Ahmad Fauzi" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all">
+                                </div>
+                                <div>
+                                    <label for="sender-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Alamat Email</label>
+                                    <input type="email" id="sender-email" required placeholder="nama@perusahaan.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="project-topic" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Topik Kebutuhan</label>
+                                <select id="project-topic" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all">
+                                    <option value="Pengembangan Aplikasi Web Custom">Pengembangan Aplikasi Web Custom</option>
+                                    <option value="Kolaborasi / Implementasi TaskWorkerPro">Kolaborasi / Implementasi TaskWorkerPro</option>
+                                    <option value="Kolaborasi / Pengembangan QuranWeb">Kolaborasi / Pengembangan QuranWeb</option>
+                                    <option value="Konsultasi Arsitektur Sistem & API">Konsultasi Arsitektur Sistem & API</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="sender-message" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Detail Pesan</label>
+                                <textarea id="sender-message" rows="4" required placeholder="Ceritakan singkat kebutuhan proyek atau ide kolaborasi Anda..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm shadow-md shadow-sky-200 transition-all active:scale-95">
+                                <span>Kirim Pesan Sekarang</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             FOOTER PERUSAHAAN
+             ================================================================= -->
+        <footer class="bg-slate-950 text-slate-400 border-t border-slate-900 py-10 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center">
+                        <svg class="w-5 h-5" viewBox="0 0 72 72" fill="none">
+                            <path d="M24 8H48L64 24V48L48 64H24L8 48V24L24 8Z" stroke="#38BDF8" stroke-width="5"/>
+                            <path d="M20 46V26L36 37L52 26V46" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="font-display font-bold text-white text-base">Maktab<span class="text-sky-400">IT</span> Technology</span>
+                </div>
+
+                <div class="text-xs text-center sm:text-right">
+                    &copy; 2026 MaktabIT Technology. Seluruh hak cipta dilindungi undang-undang.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =====================================================================
+         3. MODAL RINGKASAN TEKNIS PROYEK & TOAST NOTIFIKASI
+         ===================================================================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative animate-fade-in">
+            <button onclick="closeProjectModal()" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors" aria-label="Tutup Modal">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <div id="modal-badge" class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold mb-3"></div>
+            <h3 id="modal-title" class="font-display text-2xl font-extrabold text-slate-900 mb-2"></h3>
+            <p id="modal-desc" class="text-sm text-slate-600 leading-relaxed mb-5"></p>
+
+            <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 mb-6 space-y-2">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Arsitektur & Tujuan Pengembangan</div>
+                <p id="modal-arch" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a id="modal-repo-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-semibold text-sm transition-colors">
+                    <span>Kunjungi GitHub</span>
+                </a>
+                <button onclick="closeProjectModal()" class="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-colors">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifikasi Pengganti alert() -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl border border-slate-700 flex items-center gap-3 text-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
+            <span id="toast-message">Pesan berhasil dikirim!</span>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         4. JAVASCRIPT INTERAKTIF
+         ===================================================================== -->
+    <script>
+        // Elemen Splash Screen
+        const splashScreen = document.getElementById('splash-screen');
+        const mainWrapper = document.getElementById('main-wrapper');
+        const splashProgress = document.getElementById('splash-progress');
+        const splashPercent = document.getElementById('splash-percent');
+        const splashStatus = document.getElementById('splash-status');
+        const skipBtnLabel = document.getElementById('skip-btn-label');
+
+        let currentProgress = 0;
+        let splashTimer = null;
+        let isSiteEntered = false;
+
+        const splashStages = [
+            { min: 0, label: "Menyiapkan lingkungan kerja MaktabIT..." },
+            { min: 30, label: "Memuat modul profil & layanan..." },
+            { min: 65, label: "Menghubungkan portofolio proyek awal..." },
+            { min: 95, label: "Siap digunakan!" }
+        ];
+
+        function runSplashLoader() {
+            currentProgress = 0;
+            isSiteEntered = false;
+            splashProgress.style.width = '0%';
+            splashPercent.textContent = '0%';
+            splashStatus.textContent = splashStages[0].label;
+            skipBtnLabel.textContent = 'Lewati Intro';
+
+            if (splashTimer) clearInterval(splashTimer);
+
+            splashTimer = setInterval(() => {
+                const step = Math.floor(Math.random() * 5) + 2;
+                currentProgress = Math.min(currentProgress + step, 100);
+
+                splashProgress.style.width = `${currentProgress}%`;
+                splashPercent.textContent = `${currentProgress}%`;
+
+                for (let i = splashStages.length - 1; i >= 0; i--) {
+                    if (currentProgress >= splashStages[i].min) {
+                        splashStatus.textContent = splashStages[i].label;
+                        break;
+                    }
+                }
+
+                if (currentProgress >= 100) {
+                    clearInterval(splashTimer);
+                    skipBtnLabel.textContent = 'Masuk ke Website';
+                    setTimeout(() => {
+                        enterMainSite();
+                    }, 550);
+                }
+            }, 40);
+        }
+
+        function enterMainSite() {
+            if (isSiteEntered) return;
+            isSiteEntered = true;
+
+            if (splashTimer) clearInterval(splashTimer);
+
+            splashScreen.classList.add('splash-hidden');
+
+            setTimeout(() => {
+                mainWrapper.classList.add('page-visible');
+                document.body.classList.remove('bg-slate-950');
+                document.body.classList.add('bg-slate-50');
+            }, 200);
+        }
+
+        function replaySplash() {
+            mainWrapper.classList.remove('page-visible');
+            document.body.classList.remove('bg-slate-50');
+            document.body.classList.add('bg-slate-950');
+            splashScreen.classList.remove('splash-hidden');
+
+            // Reset animasi SVG
+            document.querySelectorAll('.logo-stroke').forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight;
+                el.style.animation = null;
+            });
+
+            setTimeout(() => {
+                runSplashLoader();
+            }, 250);
+        }
+
+        // Toggle Menu Mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Data Ringkasan Teknis Proyek
+        const projectDetails = {
+            taskworker: {
+                badge: "PROJECT #01 • WORKFLOW ENGINE",
+                badgeClass: "bg-sky-50 text-sky-700 border border-sky-200",
+                title: "TaskWorkerPro",
+                desc: "Sistem manajemen dan eksekusi tugas latar belakang yang dirancang untuk menangani beban kerja terjadwal, distribusi antrean pekerjaan, serta pemantauan status operasional secara terpusat.",
+                arch: "Dibangun dengan pendekatan modular untuk memisahkan antarmuka kontrol dari worker eksekutor, memastikan proses berat berjalan stabil tanpa menghambat responsivitas aplikasi utama.",
+                url: "https://github.com/zhavick/TaskWorkerPro"
+            },
+            quranweb: {
+                badge: "PROJECT #02 • DIGITAL LITERACY",
+                badgeClass: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+                title: "QuranWeb",
+                desc: "Aplikasi web Al-Qur'an digital yang mengutamakan kejernihan tipografi Arab, kemudahan pencarian surah dan ayat, serta pengalaman membaca yang tenang dan bebas iklan.",
+                arch: "Menggunakan arsitektur web ringan dengan pemuatan data surah yang cepat dan tata letak responsif agar nyaman diakses dari perangkat seluler maupun layar komputer.",
+                url: "https://github.com/zhavick/QuranWeb"
+            }
+        };
+
+        function openProjectModal(key) {
+            const data = projectDetails[key];
+            if (!data) return;
+
+            const modal = document.getElementById('project-modal');
+            const badge = document.getElementById('modal-badge');
+            badge.textContent = data.badge;
+            badge.className = `inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold mb-3 ${data.badgeClass}`;
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-desc').textContent = data.desc;
+            document.getElementById('modal-arch').textContent = data.arch;
+            document.getElementById('modal-repo-link').href = data.url;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Form Kontak & Toast Feedback
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('sender-name').value;
+            showToast(`Terima kasih, ${name}! Pesan Anda untuk MaktabIT Technology telah diterima.`);
+            event.target.reset();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        }
+
+        // Jalankan Splash Screen saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', runSplashLoader);
+    </script>
+</body>
+</html>
